@@ -54,8 +54,8 @@ struct utp_conn {
 	int32_t sock;				// Store socket ID
 	int64_t seqSend;			// Init sequence
 	int64_t seqRecv;			// Init sequence
-	struct sockaddr_in local;	// Local address
-	struct sockaddr_in remote;	// Remote address
+	struct sockaddr_in local;		// Local address
+	struct sockaddr_in remote;		// Remote address
 };
 
 // Track status of packet sequences
@@ -68,9 +68,9 @@ struct utp_tracker {
 
 // Window buffers
 struct utp_window {
-	struct utp_pack* send;		// Store sent frames
-	struct utp_pack* recv;		// Store recv frames
-	struct utp_pack* acks;		// Store acks for sent frames
+	struct utp_pack* send;			// Store sent frames
+	struct utp_pack* recv;			// Store recv frames
+	struct utp_pack* acks;			// Store acks for sent frames
 };
 
 /*******************************************************/
