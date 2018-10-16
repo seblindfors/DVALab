@@ -22,7 +22,7 @@ struct timeval getSelectTimeout(int timeout) {
 
 /*******************************************************/
 // Payload & window size setting/getting
-int UTP_WINDOW 	= 1;
+int UTP_WINDOW  = 1;
 int UTP_PAYLOAD = UTP_HANDSHAKE_SIZE;
 int UTP_TIMEOUT = UTP_DEFAULT_TIMEOUT;
 
