@@ -143,7 +143,7 @@ uint8_t UTP_TYPE(uint8_t flags) {
 void UTP_PACK_PROPERTIES(struct utp_pack* frame, int16_t size, int64_t seq, uint8_t flags) {
 	frame->flags 	= flags;
 	frame->size  	= size;
-	frame->seq 		= seq;
+	frame->seq 	= seq;
 	memset(frame->msg, 0, UTP_PAYLOAD);
 }
 
