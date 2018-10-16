@@ -10,9 +10,9 @@
 
 // System headers
 #include <sys/time.h> 	// Sequence number generation
-#include <string.h>		// String comparisons
-#include <stdlib.h>		// Heap allocation
-#include <stdio.h> 		// printf(), fgets()
+#include <string.h>	// String comparisons
+#include <stdlib.h>	// Heap allocation
+#include <stdio.h> 	// printf(), fgets()
 
 // IP & transport header
 #include <arpa/inet.h>
