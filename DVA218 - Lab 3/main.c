@@ -20,10 +20,10 @@ int32_t wsize, fsize, psize; 		// Size parameters: window, frame, payload
 
 pthread_mutex_t 	fileAccess; 	// Mutex lock for socket writing/reading.
 
-struct 	utp_window 	buffer;		// Buffers for send, recv and acks.
-struct 	utp_tracker 	status;		// Status tracker for frame sequences.
-struct 	utp_conn 	conn;		// Connection structure.
-struct 	utp_pack* 	frame;		// Shared frame for sequential send/recv.
+struct utp_window 	buffer;		// Buffers for send, recv and acks.
+struct utp_tracker 	status;		// Status tracker for frame sequences.
+struct utp_conn 	conn;		// Connection structure.
+struct utp_pack* 	frame;		// Shared frame for sequential send/recv.
 
 /*--------------------------------------------------
  * Helper functions
