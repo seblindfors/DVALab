@@ -8,8 +8,8 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#define VERBOSE						// Remove this to prevent debug output
-#define NIL				"___"		// Print when state is missing from i/o info
+#define VERBOSE				// Remove this to prevent debug output
+#define NIL		"___"		// Print when state is missing from i/o info
 #define BUFFER_SIZE 	1024 		// General buffer size for input/output
 #define THREAD_SLEEP 	20000		// How long should selective repeat sleep
 #define QUIT_MSG 		"QUIT\n" 	// What to check for in input stream to send FIN
@@ -20,10 +20,10 @@ int32_t wsize, fsize, psize; 		// Size parameters: window, frame, payload
 
 pthread_mutex_t 	fileAccess; 	// Mutex lock for socket writing/reading.
 
-struct 	utp_window 	buffer;			// Buffers for send, recv and acks.
-struct 	utp_tracker status;			// Status tracker for frame sequences.
-struct 	utp_conn 	conn;			// Connection structure.
-struct 	utp_pack* 	frame;			// Shared frame for sequential send/recv.
+struct 	utp_window 	buffer;		// Buffers for send, recv and acks.
+struct 	utp_tracker 	status;		// Status tracker for frame sequences.
+struct 	utp_conn 	conn;		// Connection structure.
+struct 	utp_pack* 	frame;		// Shared frame for sequential send/recv.
 
 /*--------------------------------------------------
  * Helper functions
