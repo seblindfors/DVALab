@@ -12,7 +12,7 @@
 #define NIL		"___"		// Print when state is missing from i/o info
 #define BUFFER_SIZE 	1024 		// General buffer size for input/output
 #define THREAD_SLEEP 	20000		// How long should selective repeat sleep
-#define QUIT_MSG 		"QUIT\n" 	// What to check for in input stream to send FIN
+#define QUIT_MSG 	"QUIT\n" 	// What to check for in input stream to send FIN
 
 
 int  	running = 1, tdClean = 0; 	// (1) Thread condition (2) Clean exit
