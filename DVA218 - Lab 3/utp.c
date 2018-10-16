@@ -183,7 +183,7 @@ void UTP_PACK_MESSAGE(struct utp_pack* frame, char* stream, int64_t seq, uint8_t
 	// (2) Append END as flag if message fits in single frame.
 	int msgLength 	= strlen(stream);
 	int overflow 	= (msgLength > UTP_PAYLOAD) ? 1 : 0;
-	int psize 		= overflow ? UTP_PAYLOAD : msgLength;
+	int psize 	= overflow ? UTP_PAYLOAD : msgLength;
 	int modflag 	= overflow ? UTP_TYPE(flags) : (END | flags);
 
 	UTP_PACK_PROPERTIES(frame, psize, seq, modflag);
@@ -201,11 +201,11 @@ void UTP_PACK_MESSAGE(struct utp_pack* frame, char* stream, int64_t seq, uint8_t
  	0: timeout
  *--------------------------------------------------*/
 int UTP_RECV(struct utp_conn* conn, struct utp_pack* frame, int timeout) {
-	fd_set  			fdrd = getSelectSet(conn->sock);
+	fd_set  		fdrd = getSelectSet(conn->sock);
 	struct timeval	 	time = getSelectTimeout(timeout);
 	struct sockaddr* 	addr = (struct sockaddr *) &(conn->remote);
-	int32_t 			size = (int32_t) UTP_GET_FRAME_SIZE();
-	int32_t				alen = sizeof(conn->remote);
+	int32_t 		size = (int32_t) UTP_GET_FRAME_SIZE();
+	int32_t			alen = sizeof(conn->remote);
 
 	if (select(conn->sock + 1, &fdrd, NULL, NULL, &time)) {
 		recvfrom(conn->sock, frame, size, 0, addr, &alen);
@@ -222,8 +222,8 @@ int UTP_RECV(struct utp_conn* conn, struct utp_pack* frame, int timeout) {
 
 int UTP_SEND(struct utp_conn* conn, struct utp_pack* frame) {
 	struct sockaddr* 	addr = (struct sockaddr *) &(conn->remote);
-	int32_t 			size = (int32_t) UTP_GET_FRAME_SIZE();
-	int32_t				alen = sizeof(conn->remote);
+	int32_t 		size = (int32_t) UTP_GET_FRAME_SIZE();
+	int32_t			alen = sizeof(conn->remote);
 
 	frame->time = UTP_TIME();
 	UTP_MD5_ADD(frame);
@@ -239,8 +239,8 @@ int bonkers = 0;
 
 int UTP_SEND(struct utp_conn* conn, struct utp_pack* frame) {
 	struct sockaddr* 	addr = (struct sockaddr *) &(conn->remote);
-	int32_t 			size = (int32_t) UTP_GET_FRAME_SIZE();
-	int32_t				alen = sizeof(conn->remote);
+	int32_t 		size = (int32_t) UTP_GET_FRAME_SIZE();
+	int32_t			alen = sizeof(conn->remote);
 
 	frame->time = UTP_TIME();
 	UTP_MD5_ADD(frame);
@@ -342,25 +342,25 @@ void createInconsistency(int argc, char* argv[], int offset) {
 
 
 int UTP_OPEN_RECV(struct utp_conn *conn, int argc, char* argv[]) {
-	int port 	= cmdParse("-port",	 UTP_DEFAULT_PORT,    2, argc, argv);
-	int wsize 	= cmdParse("-wsize", UTP_DEFAULT_WSIZE,   2, argc, argv);
-	int psize 	= cmdParse("-psize", UTP_DEFAULT_PSIZE,   2, argc, argv);
+	int port  = cmdParse("-port",  UTP_DEFAULT_PORT,  2, argc, argv);
+	int wsize = cmdParse("-wsize", UTP_DEFAULT_WSIZE, 2, argc, argv);
+	int psize = cmdParse("-psize", UTP_DEFAULT_PSIZE, 2, argc, argv);
 
 	memset(&(conn->remote), 0, sizeof(conn->remote));
 
 	// Create potential to simulate unstable connection
 	createInconsistency(argc, argv, 2);
 
-	conn->local.sin_family 			= AF_INET;
-	conn->local.sin_port 			= htons(port);
+	conn->local.sin_family 		= AF_INET;
+	conn->local.sin_port 		= htons(port);
 	conn->local.sin_addr.s_addr 	= htonl(INADDR_ANY);
 
 	conn->seqSend	= UTP_TIME();
-	conn->sock 		= socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	conn->sock 	= socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
 	if (bind(conn->sock,
-			(struct sockaddr *) &(conn->local),
-			sizeof(conn->local)) < 0 ) {
+		(struct sockaddr *) &(conn->local),
+		sizeof(conn->local)) < 0 ) {
 		printf("Failed to bind socket.\n");
 		return 1;
 	}
@@ -401,21 +401,21 @@ int UTP_OPEN_RECV(struct utp_conn *conn, int argc, char* argv[]) {
 
 
 int UTP_OPEN_SEND(struct utp_conn *conn, int argc, char* argv[]) {
-	int port 	= cmdParse("-port",	 UTP_DEFAULT_PORT,    3, argc, argv);
-	int wsize 	= cmdParse("-wsize", UTP_DEFAULT_WSIZE,   3, argc, argv);
-	int psize 	= cmdParse("-psize", UTP_DEFAULT_PSIZE,   3, argc, argv);
+	int port  = cmdParse("-port",  UTP_DEFAULT_PORT,  3, argc, argv);
+	int wsize = cmdParse("-wsize", UTP_DEFAULT_WSIZE, 3, argc, argv);
+	int psize = cmdParse("-psize", UTP_DEFAULT_PSIZE, 3, argc, argv);
 
 	memset(&(conn->remote), 0, sizeof(conn->remote));
 
 	// Create potential to simulate unstable connection
 	createInconsistency(argc, argv, 3);
 
-	conn->remote.sin_family 		= AF_INET;
-	conn->remote.sin_port 			= htons(port);
+	conn->remote.sin_family 	= AF_INET;
+	conn->remote.sin_port 		= htons(port);
 	conn->remote.sin_addr.s_addr 	= inet_addr(argv[2]);
 
 	conn->seqSend	= UTP_TIME();
-	conn->sock 		= socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	conn->sock 	= socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
 	// Set up initial hanshake frame
 	struct utp_pack* frame = malloc(sizeof(*frame) + UTP_HANDSHAKE_SIZE * sizeof(char));
