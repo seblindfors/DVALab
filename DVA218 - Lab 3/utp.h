@@ -35,7 +35,7 @@
 #define UTP_DEFAULT_PORT 	5555
 #define UTP_DEFAULT_WSIZE	16
 #define UTP_DEFAULT_PSIZE	32
-#define UTP_DEFAULT_TIMEOUT 60000
+#define UTP_DEFAULT_TIMEOUT 	60000
 #define UTP_HANDSHAKE_SIZE 	16
 #define UTP_TEARDOWN_MAX 	16
 
@@ -45,7 +45,7 @@ struct utp_pack {
 	int64_t seq;				// Sequence number
 	int64_t time;				// Timestamp
 	uint8_t flags;				// Flags bit field
-	char 	md5[MD5_DIGEST_LENGTH]; // Checksum
+	char 	md5[MD5_DIGEST_LENGTH]; 	// Checksum
 	char	msg[];				// Dynamic payload
 };
 
