@@ -94,8 +94,8 @@ void debug(uint8_t input, uint8_t output) {
 /*--------------------------------------------------
  *	Automatic repeat request (threads)
  *--------------------------------------------------
- * 	resend: 	resends a frame that has timed out
- * 	request: 	requests a frame that never arrived
+ * resend: 	resends a frame that has timed out
+ * request: 	requests a frame that never arrived
  *--------------------------------------------------*/
 void* resend(void* args) {
 	while(running) {
