@@ -109,8 +109,10 @@ void version5(int mat1[N][N], int mat2[N][N], int result[N][N]) {
 
 	for (i = 0; i < N; ++i)
 		for (k = 0; k < N; ++k) {
-			vA = _mm256_set1_epi32(mat1[i][k]); // local cell to use for multiplications (only 1 int), row first, like version4.
-			for (j = 0; j < N; j += VECTORIZE) { // vectorize 8 values (256/32 = 8)
+			// (1) vA: local cell to use for multiplications (only 1 int), row first, like version4.
+			// (2) for loop: vectorize 8 values (256/32 = 8)
+			vA = _mm256_set1_epi32(mat1[i][k]);
+			for (j = 0; j < N; j += VECTORIZE) {
 				// (1) load 8 ints from mat2, row first
 				// (2) load 8 ints from result, row first
 				// (3) (8 consecutive ints of result) += (cell * (8 consecutive ints from mat2))
