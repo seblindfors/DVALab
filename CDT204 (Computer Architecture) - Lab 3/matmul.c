@@ -1,6 +1,6 @@
 /*
 	CDT204 - Computer Architecture (2017)
-	Lab Assignment 3
+	Lab Assignment 3: matrix multiplcation
 	Author: Sebastian Lindfors
 */
 
