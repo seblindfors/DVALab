@@ -200,7 +200,7 @@ int main(void) {
 	return 0;
 }
 
-/*	Average results for 100 iterations:
+/*  Average results for 100 iterations:
     raw       optimized  algorithm  
     4.285620  0.502490   version1
     3.236650  0.502120   version2
