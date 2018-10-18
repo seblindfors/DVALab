@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include <immintrin.h> // AVX instruction set
+#include <immintrin.h> // AVX instruction set (x86)
 
 /*
 	This program performs experimental evaluations of different methods used to multiply two large (10^6 cells) matrices.
@@ -209,4 +209,12 @@ int main(void) {
     2.256460  0.502110   version3
     1.919360  0.332810   version4
     0.420020  0.139220   version5
+    
+    Discussion and conclusion:
+    The closer you get to accessing all 3 matrices row first, the faster the algorithm ends up in the end.
+    Organizing the loops in a way that favors row-major order compilers seems to yield the best speed, although this
+    is not as obvious with optimization turned on. My guess is that the compiler (when optimized) recognizes
+    what you're trying to do, and reorganizes the algorithm to reduce cache miss.
+    The reason why AVX is only slightly slower without optimization is likely because the algorithm is already
+    organized in the best possible way. AVX is superior because it processes 8 calculations at a time in parallell.
 */
