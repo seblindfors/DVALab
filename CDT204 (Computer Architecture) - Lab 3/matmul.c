@@ -111,10 +111,14 @@ void version5(int mat1[N][N], int mat2[N][N], int result[N][N]) {
 		for (k = 0; k < N; ++k) {
 			vA = _mm256_set1_epi32(mat1[i][k]); // local cell to use for multiplications (only 1 int), row first, like version4.
 			for (j = 0; j < N; j += VECTORIZE) { // vectorize 8 values (256/32 = 8)
-				vB = _mm256_loadu_si256(&mat2[k][j]);	// load 8 ints from mat2, row first
-				vR = _mm256_loadu_si256(&result[i][j]); // load 8 ints from result, row first
-				vR = _mm256_add_epi32(vR, _mm256_mullo_epi32(vA, vB)); // (8 consecutive ints of result) += (cell * (8 consecutive ints from mat2))
-				_mm256_storeu_si256(&result[i][j], vR); // store the 8 updated ints to result, from index j+0 to j+7.
+				// (1) load 8 ints from mat2, row first
+				// (2) load 8 ints from result, row first
+				// (3) (8 consecutive ints of result) += (cell * (8 consecutive ints from mat2))
+				// (4) store the 8 updated ints to result, from index j+0 to j+7.
+				vB = _mm256_loadu_si256(&mat2[k][j]);
+				vR = _mm256_loadu_si256(&result[i][j]);
+				vR = _mm256_add_epi32(vR, _mm256_mullo_epi32(vA, vB));
+				_mm256_storeu_si256(&result[i][j], vR);
 			}
 		}
 }
