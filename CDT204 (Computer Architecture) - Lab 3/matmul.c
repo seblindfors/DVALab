@@ -143,7 +143,9 @@ void init_matrices() {
 	}
 }
 
-void runtest(void * f(int mat1[N][N], int mat2[N][N], int result[N][N]), int version, double clocks[5], int mat1[N][N], int mat2[N][N], int result[N][N]) {
+void runtest(void * f(int mat1[N][N], int mat2[N][N], int result[N][N]),
+	int version, double clocks[5], int mat1[N][N], int mat2[N][N], int result[N][N]) {
+	
 	// Initialize the matrices
 	init_matrices();
 
